@@ -60,23 +60,6 @@ typedef uint16					ENUM16;
 
 
 
-typedef struct
-{
-
-	uint8	tidSrc;
-
-	uint8	tidTarget;
-
-	uint8	mode;			//Reserved for future use
-
-	uint8	flowControl;	//Reserved for future use
-
-	uint16	ITCObjectID;
-
-	uint16	len;			//>=8
-
-}ITCObjHeader;
-
 
 ////////////////////////////////////////////////////////////////////////////////////
 

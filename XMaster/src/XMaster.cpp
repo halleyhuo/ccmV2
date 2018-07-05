@@ -20,8 +20,8 @@
 
 #include "Types.h"
 #include "IDCXTP/Client/inc/xtpClient.h"
-#include "IDCXTaskID.h"
-#include "XtpNode.h"
+#include "IDCBase/inc/IDCThread.h"
+#include "XTypes.h"
 
 
 

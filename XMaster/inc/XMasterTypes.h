@@ -4,7 +4,7 @@
  *		Imaging dynamic Company
  *
  * FileName:
- *		IDCXTaskID.h
+ *		XMasterTypes.h
  *
  * Description:
  *
@@ -17,22 +17,22 @@
  *
  */
 
-#ifndef __IDC_X_TASK_ID_H__
-#define __IDC_X_TASK_ID_H__
+#ifndef __IDC_X_MASTER_TYPE_H__
+#define __IDC_X_MASTER_TYPE_H__
 
 #include "Types.h"
+#include "IDCBase/inc/IDCThread.h"
 #include "TuiTypes.h"
 #include "GenTypes.h"
+#include "XGenTypes.h"
 
 #define IDC_TASK_XMASTER			1
 #define IDC_TASK_XTUI				2
 #define IDC_TASK_XGENERATOR			3
 
 
-
-
 /* transmission TUI command from XMaster to XTui */
-#define TRANS_TUI_CMD				0
+#define TRANS_TUI_CMD				1
 /* the frame from XMaster to XTui*/
 typedef struct _TransTuiCmdFrame
 {
@@ -41,7 +41,7 @@ typedef struct _TransTuiCmdFrame
 } TransTuiCmdFrame;
 
 /* transmission from XTui to XMaster */
-#define TRANS_TUI_REPORT			1
+#define TRANS_TUI_REPORT			2
 /* the frame from XTui to XMaster */
 typedef struct _TransTuiReportFrame
 {
@@ -50,7 +50,7 @@ typedef struct _TransTuiReportFrame
 } TransTuiReportFrame;
 
 /* transmission from XMaster to XGenerator */
-#define TRANS_GEN_REPORT			10
+#define TRANS_GEN_REPORT			11
 /* the frame from XMaster to XGenerator */
 typedef struct _TransGenReprotFrame
 {
@@ -59,7 +59,7 @@ typedef struct _TransGenReprotFrame
 } TransGenReportFrame;
 
 /* transmission from XGenerator to XMaster */
-#define TRANS_GEN_CMD				11
+#define TRANS_GEN_CMD				12
 /* the frame from XGenerator to XMaster */
 typedef struct _TransGenCmdFrame
 {

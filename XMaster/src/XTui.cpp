@@ -19,7 +19,8 @@
 
 #include "Types.h"
 #include "XTui.h"
-#include "IDCXTaskID.h"
+#include "IDCBase/inc/IDCThread.h"
+#include "XTypes.h"
 
 CXTui::CXTui()
 {
@@ -56,7 +57,7 @@ void CXTui::run()
 				break;
 
 				default:
-					break;
+				break;
 			}
 		}
 	}

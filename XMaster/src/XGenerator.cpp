@@ -19,8 +19,8 @@
 
 #include "XGenerator.h"
 #include "Types.h"
-#include "IDCXTaskID.h"
-
+#include "XTypes.h"
+#include "IDCBase/inc/IDCThread.h"
 
 CXGenerator::CXGenerator() : CIDCThread("xGenerator", IDC_TASK_XGENERATOR, Small, Moderate, true)
 {
