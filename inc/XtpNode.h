@@ -14,28 +14,28 @@
 
 
 
-#define TUI_CMD			0x0301
+#define TUI_CMD_SETS			0x0301
 
 
 typedef struct _TuiCmdFrame
 {
 	tXtpObjHeader	header;
-	TuiCmd			tuiCmd;
+	TuiCmdSets		tuiCmdSets;
 } XTP_DEF_PACKED TuiCmdFrame;
 
 
-#define TUI_REPORT		0x0302
+#define TUI_REPORT_SETS			0x0302
 
 
 typedef struct _TuiReportFrame
 {
 	tXtpObjHeader	header;
-	TuiReport		tuiReport;
+	TuiReportSets	tuiReportSets;
 } XTP_DEF_PACKED TuiReportFrame;
 
 
 
-#define GEN_CMD			0x3011
+#define GEN_CMD					0x3011
 
 typedef struct _GenCmdFrame
 {
@@ -44,7 +44,7 @@ typedef struct _GenCmdFrame
 } XTP_DEF_PACKED GenCmdFrame;
 
 
-#define GEN_REPORT		0x0312
+#define GEN_REPORT				0x0312
 
 typedef struct _GenReportFrame
 {

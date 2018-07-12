@@ -54,6 +54,14 @@ typedef uint8		EndReasonType;
 #define ER_TIME					6
 
 
+typedef uint8		GeneratorState;
+#define GEN_STATE_STANDY		1
+#define GEN_STATE_INIT			2
+#define GEN_STATE_START			3
+#define GEN_STATE_ERROR			4
+#define GEN_STATE_EXPOSURE		5
+
+
 typedef struct _ActualExposureData
 {
 	KvValueType			kv;
@@ -83,7 +91,7 @@ typedef struct _ExposuringParam
 
 typedef struct _PresetParam
 {
-	FluoroMode			fluoroMode;
+	FluoroMode			mode;
 	KvValueType			kv;
 	MaValueType			ma;
 	MsValueType			ms;

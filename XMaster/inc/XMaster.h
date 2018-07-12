@@ -42,6 +42,9 @@ class CXMaster : public CIDCThread
 
 	private:
 
+		void OnTransCmdGen(GenCmd *pGenCmd);
+
+	private:
 		CXtpClient		*xtpClient;
 };
 #endif // __X_MASTER_H__

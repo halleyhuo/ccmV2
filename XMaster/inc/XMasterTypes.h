@@ -32,59 +32,59 @@
 
 
 /* transmission TUI command from XMaster to XTui */
-#define TRANS_TUI_CMD				1
+#define TRANS_TUI_CMD_SETS			1
 /* the frame from XMaster to XTui*/
 typedef struct _TransTuiCmdFrame
 {
 	ITCObjHeader	header;
-	TuiCmd			tuiCmd;
+	TuiCmdSets		tuiCmdSets;
 } TransTuiCmdFrame;
 
 /* transmission from XTui to XMaster */
-#define TRANS_TUI_REPORT			2
+#define TRANS_TUI_REPORT_SETS		2
 /* the frame from XTui to XMaster */
 typedef struct _TransTuiReportFrame
 {
 	ITCObjHeader	header;
-	TuiReport		tuiReport;
+	TuiReportSets	tuiReportSets;
 } TransTuiReportFrame;
 
 /* transmission from XMaster to XGenerator */
-#define TRANS_GEN_REPORT			11
+#define TRANS_REPORT_GEN			11
 /* the frame from XMaster to XGenerator */
-typedef struct _TransGenReprotFrame
+typedef struct _TransReprotGenFrame
 {
 	ITCObjHeader	header;
 	GenReport		genReport;
-} TransGenReportFrame;
+} TransReportGenFrame;
 
 /* transmission from XGenerator to XMaster */
-#define TRANS_GEN_CMD				12
+#define TRANS_CMD_GEN				12
 /* the frame from XGenerator to XMaster */
-typedef struct _TransGenCmdFrame
+typedef struct _TransCmdGenFrame
 {
 	ITCObjHeader	header;
 	GenCmd			genCmd;
-} TransGenCmdFrame;
+} TransCmdGenFrame;
 
 /* internal transmission to XGenerator (E.g from XTui to XGenerator) */
-#define X_GEN_CMD					15
+#define X_CMD_GEN					15
 /* the frame transmission to XGenerator in internal thread */
-typedef struct _XGenCmdFrame
+typedef struct _XCmdGenFrame
 {
 	ITCObjHeader	header;
-	XGenCmd			xGenCmd;
-} XGenCmdFrame;
+	XCmdGen			xCmdGen;
+} XCmdGenFrame;
 
 
-#define X_GEN_REPORT				16
+#define X_REPORT_GEN				16
 
-typedef struct _XGenReportFrame
+typedef struct _XReportGenFrame
 {
 	ITCObjHeader	header;
-	XGenReport		xGenReport;
-} XGenReportFrame;
+	XReportGen		xReportGen;
+} XReportGenFrame;
 
 
-#endif /*__IDC_X_TASK_ID_H__*/
+#endif /*__IDC_X_MASTER_TYPE_H__*/
 

@@ -23,104 +23,63 @@
 #include "Types.h"
 
 
-typedef uint16			XGenCmdId;
+
+#define X_CMD_GEN_MODE					101
+#define X_CMD_GEN_FPS					102
+
+#define X_CMD_GEN_MAGNIFY				103
+#define X_CMD_GEN_DOSE					104
+#define X_CMD_GEN_ROAD					105
+#define X_CMD_GEN_SUB					106
+#define X_CMD_GEN_FLUORO				107
+#define X_CMD_GEN_SINGLE_IMAGE			108
 
 
-/* param XGenFluoroMode is valid */
-#define	XGEN_CMD_FLUORO_MODE			100
-
-/* param XGenFluoroVAS is valid*/
-#define XGEN_CMD_FLUORO_VAS				200
-
-/* param XGenKvValue is valid*/
-#define XGEN_CMD_FLUORO_KV				211
-/* param XGenMsValue is valid*/
-#define XGEN_CMD_FLUORO_MS				212
-/* param XGenMaValue is valid*/
-#define XGEN_CMD_FLUORO_MA				213
-/* param XGenMasValue is valid*/
-#define XGEN_CMD_FLUORO_MAS				214
-
-/* param XGenFluoroFps is valid*/
-#define XGEN_CMD_FLUORO_FPS				300
-
-/* param XGenFluoroDose is valid*/
-#define XGEN_CMD_FLUORO_DOSE			400
+#define X_CMD_GEN_KV_PLUS				111
+#define X_CMD_GEN_KV_MINUS				112
+#define X_CMD_GEN_MA_PLUS				113
+#define X_CMD_GEN_MA_MINUS				114
 
 
+typedef uint32			XCmdGenMode;
 
-typedef uint8	XGenCmdFluoroMode;
-
-#define XGEN_CMD_FLUORO_MODE_N			0
-#define XGEN_CMD_FLUORO_MODE_C			1
-#define XGEN_CMD_FLUORO_MODE_P			2
-#define XGEN_CMD_FLUORO_MODE_S			3
-
+#define X_CMD_GEN_MODE_N				0
+#define X_CMD_GEN_MODE_C				1
+#define X_CMD_GEN_MODE_P				2
+#define X_CMD_GEN_MODE_S				3
 
 
-typedef uint8	XGenCmdFluoroVAS;
+typedef uint32			XCmdGenFps;
 
-#define XGEN_CMD_FLUORO_VAS_PLUS		1
-#define XGEN_CMD_FLUORO_VAS_MINUS		2
-
-
-typedef uint8	XGenCmdFluoroFps;
-
-#define XGEN_CMD_FLUORO_FPS_N			0
-#define XGEN_CMD_FLUORO_FPS_5			1
-#define XGEN_CMD_FLUORO_FPS_10			2
-#define XGEN_CMD_FLUORO_FPS_15			3
-#define XGEN_CMD_FLUORO_FPS_20			4
-#define XGEN_CMD_FLUORO_FPS_30			5
+#define X_CMD_GEN_FPS_N					0
+#define X_CMD_GEN_FPS_5					1
+#define X_CMD_GEN_FPS_10				2
+#define X_CMD_GEN_FPS_15				3
+#define X_CMD_GEN_FPS_20				4
+#define X_CMD_GEN_FPS_30				5
 
 
 
-typedef uint8	XGenCmdFluoroDose;
-
-#define XGEN_CMD_FLUORO_DOSE_N			0
-#define XGEN_CMD_FLUORO_DOSE_1			1
-#define XGEN_CMD_FLUORO_DOSE_2			2
-#define XGEN_CMD_FLUORO_DOSE_3			3
+typedef uint32			XCmdGenId;
+typedef uint32			XCmdGenParam;
 
 
-typedef uint16		XGenReportId;
-
-/*
- * confirm received X-ray parameters for single, continuous and pulsed mode
- * parameter PresetParam is valid
- */
-#define XGEN_REPORT_CFM_PRESET_PARAM	100
-
-
-typedef struct _XGenCmd
+typedef struct _XCmdGen
 {
-	XGenCmdId		xGenCmdId;
-
-	union
-	{
-		XGenCmdFluoroMode		xGenCmdFluoroMode;
-		XGenCmdFluoroVAS		xGenCmdFluoroVAS;
-		KvValueType				xGenKvValue;
-		MaValueType				xGenMaValue;
-		MsValueType				xGenMsValue;
-		MasValueType			xGenMasValue;
-		XGenCmdFluoroFps		xGenCmdFluoroFps;
-		XGenCmdFluoroDose		xGenCmdFluoroDose;
-	} param;
-
-} XTP_DEF_PACKED XGenCmd;
+	XCmdGenId		xCmdGenId;
+	XCmdGenParam	xCmdGenParam;
+} XTP_DEF_PACKED XCmdGen;
 
 
-typedef struct _XGenReport
+
+typedef uint32			XReportGenId;
+typedef uint32			XReportGenParam;
+
+typedef struct _XReportGen
 {
-	XGenReportId		xgenReportId;
-
-	union
-	{
-		PresetParam 			preParam;
-	} param;
-
-} XTP_DEF_PACKED XGenReport;
+	XReportGenId	xReporGentId;
+	XReportGenParam	xReportGenParam;
+} XTP_DEF_PACKED XReportGen;
 
 
 #endif

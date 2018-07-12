@@ -25,6 +25,15 @@
 #include "Types.h"
 #include "GenTypes.h"
 #include "IDCBase/inc/IDCThread.h"
+#include "XMasterTypes.h"
+
+
+typedef struct _GeneratorStatus
+{
+	PresetParam			genPresets;
+	GeneratorState		genState;
+} GeneratorStatus;
+
 
 class CXGenerator : public CIDCThread
 {
@@ -36,7 +45,13 @@ class CXGenerator : public CIDCThread
 		virtual void run();
 
 	private:
-		
+		void OnXCmdGen(XCmdGen * pXCmdGen);
+
+		void OnXCmdGenMode(XCmdGenParam xCmdGenParam);
+
+
+	private:
+		GeneratorStatus		genStatus;
 };
 #endif //__X_GENERATOR_H__
 

@@ -27,7 +27,7 @@
 
 static void XMasterCallBackFunc(tXtpObjHeader * msg, void * para);
 
-static void OnTuiCmd(TuiCmd * tuiCmd);
+static void OnTuiCmdSets(TuiCmdSets * tuiCmdSets);
 
 static void OnGenReport(GenReport * genReport);
 
@@ -68,6 +68,17 @@ void CXMaster::run()
 
 			switch(p->ITCObjectID)
 			{
+				case TRANS_TUI_REPORT_SETS:
+					break;
+
+				case TRANS_CMD_GEN:
+				{
+					GenCmd		*pGenCmd = (GenCmd *)(p + 1);
+
+					OnTransCmdGen(pGenCmd);
+				}
+				break;
+
 				default:
 					break;
 
@@ -82,10 +93,10 @@ void XMasterCallBackFunc(tXtpObjHeader * msg, void * para)
 	{
 		switch(msg->telID)
 		{
-			case TUI_CMD:
+			case TUI_CMD_SETS:
 			{
-				TuiCmd *pTuiCmd = (TuiCmd *)(msg + 1);
-				OnTuiCmd(pTuiCmd);
+				TuiCmdSets	*pTuiCmdSets = (TuiCmdSets *)(msg + 1);
+				OnTuiCmdSets(pTuiCmdSets);
 			}
 			break;
 
@@ -103,7 +114,7 @@ void XMasterCallBackFunc(tXtpObjHeader * msg, void * para)
 }
 
 
-void OnTuiCmd(TuiCmd * tuiCmd)
+void OnTuiCmdSets(TuiCmdSets * tuiCmdSets)
 {
 	TransTuiCmdFrame		transTuiCmdFrame;
 
@@ -112,8 +123,8 @@ void OnTuiCmd(TuiCmd * tuiCmd)
 	transTuiCmdFrame.header.mode			= 0;
 	transTuiCmdFrame.header.flowControl		= 0;
 	transTuiCmdFrame.header.len				= sizeof(TransTuiCmdFrame);
-	transTuiCmdFrame.header.ITCObjectID		= TRANS_TUI_CMD;
-	memcpy(&transTuiCmdFrame.tuiCmd, tuiCmd, sizeof(TuiCmd));
+	transTuiCmdFrame.header.ITCObjectID		= TRANS_TUI_CMD_SETS;
+	memcpy(&transTuiCmdFrame.tuiCmdSets, tuiCmdSets, sizeof(TuiCmdSets));
 
 	CIDCThread::ITCSend(&transTuiCmdFrame.header);
 }
@@ -121,16 +132,30 @@ void OnTuiCmd(TuiCmd * tuiCmd)
 
 void OnGenReport(GenReport * genReport)
 {
-	TransGenReportFrame		transGenReportFrame;
+	TransReportGenFrame		transReportGenFrame;
 
-	transGenReportFrame.header.tidSrc		= IDC_TASK_XMASTER;
-	transGenReportFrame.header.tidTarget	= IDC_TASK_XGENERATOR;
-	transGenReportFrame.header.mode			= 0;
-	transGenReportFrame.header.flowControl	= 0;
-	transGenReportFrame.header.len			= sizeof(TransGenReportFrame);
-	transGenReportFrame.header.ITCObjectID	= TRANS_GEN_REPORT;
-	memcpy(&transGenReportFrame.genReport, genReport, sizeof(GenReport));
+	transReportGenFrame.header.tidSrc		= IDC_TASK_XMASTER;
+	transReportGenFrame.header.tidTarget	= IDC_TASK_XGENERATOR;
+	transReportGenFrame.header.mode			= 0;
+	transReportGenFrame.header.flowControl	= 0;
+	transReportGenFrame.header.len			= sizeof(TransReportGenFrame);
+	transReportGenFrame.header.ITCObjectID	= TRANS_REPORT_GEN;
+	memcpy(&transReportGenFrame.genReport, genReport, sizeof(GenReport));
 
-	CIDCThread::ITCSend(&transGenReportFrame.header);
+	CIDCThread::ITCSend(&transReportGenFrame.header);
+}
+
+void CXMaster::OnTransCmdGen(GenCmd *pGenCmd)
+{
+	GenCmdFrame			genCmdFrame;
+
+	genCmdFrame.header.sender	= xtpClient->GetNodeID();
+	genCmdFrame.header.target	= XTP_NODE_GENERATOR;
+	genCmdFrame.header.telID	= GEN_CMD;
+	genCmdFrame.header.mode		= XTP_MODE_DIRECT;
+	genCmdFrame.header.length	= sizeof(GenCmdFrame);
+	memcpy(&genCmdFrame.genCmd, pGenCmd, sizeof(GenCmd));
+
+	xtpClient->XtpSend(&genCmdFrame.header);
 }
 

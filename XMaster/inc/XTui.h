@@ -22,6 +22,7 @@
 
 #include "Types.h"
 #include "IDCBase/inc/IDCThread.h"
+#include "TuiTypes.h"
 
 
 class CXTui : public CIDCThread
@@ -34,6 +35,42 @@ class CXTui : public CIDCThread
 		virtual void run();
 
 	private:
+
+		void OnTuiCmdGenMode(TuiCmdParams cmdParams);
+
+		void OnTuiCmdGenFps(TuiCmdParams cmdParams);
+
+		void OnTuiCmdGenMagnify(void);
+
+		void OnTuiCmdGenDose(void);
+
+		void OnTuiCmdGenRoad(void);
+
+		void OnTuiCmdGenSub(void);
+
+		void OnTuiCmdGenFluoro(void);
+
+		void OnTuiCmdGenSingleImage(void);
+
+		void OnTuiCmdGenKvPlus(void);
+
+		void OnTuiCmdGenKvMinus(void);
+
+		void OnTuiCmdGenMaPlus(void);
+
+		void OnTuiCmdGenMaMinus(void);
+
+		void OnTuiCmdCArmDown(void);
+
+		void OnTuiCmdCArmUp(void);
+
+		void OnTuiCmdColUdNarrow(void);
+
+		void OnTuiCmdColUdExpand(void);
+
+		void OnTuiCmdColLrNarrow(void);
+
+		void OnTuiCmdColLrExpand(void);
 
 };
 
