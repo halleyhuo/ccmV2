@@ -20,6 +20,7 @@ find_library(LIB_XTPCLIENT
 
 add_executable( GenVD
 src/GenVdMain.cpp
-src/GenComm.cpp)
+src/GenComm.cpp
+src/GenVdProc.cpp)
 
 target_link_libraries( GenVD  ${LIB_XTPCLIENT} ${LIB_BASE} rt pthread )

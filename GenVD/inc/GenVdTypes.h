@@ -22,6 +22,8 @@
 
 #include "Types.h"
 
+#define IDC_TASK_GENVDPROC			1
+
 typedef enum
 {
 	RecvStateStart,

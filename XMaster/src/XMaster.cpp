@@ -22,22 +22,13 @@
 #include "IDCXTP/Client/inc/xtpClient.h"
 #include "IDCBase/inc/IDCThread.h"
 #include "XTypes.h"
-
-
+#include "BroadcastList.h"
 
 static void XMasterCallBackFunc(tXtpObjHeader * msg, void * para);
 
 static void OnTuiCmdSets(TuiCmdSets * tuiCmdSets);
 
 static void OnGenReport(GenReport * genReport);
-
-
-BRODCAST_LIST broadcastList[] = 
-{    
-	{XTP_NODE_MASTER,				0},
-	{XTP_NODE_COLLIMATOR_CONTROL,	0},
-	{XTP_NODE_GENERATOR,			0},
-};
 
 
 CXMaster::CXMaster() : CIDCThread("xMaster", IDC_TASK_XMASTER, Small, Moderate, true)

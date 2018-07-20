@@ -1,17 +1,25 @@
-
-
+/**********************************************************************
+ *
+ * Copyright:
+ *		Imaging dynamic Company
+ *
+ * FileName:
+ *		XtpNode.h
+ *
+ * Description:
+ *
+ *
+ * Author:
+ *		Halley
+ *
+ * Create Date:
+ *		2018/6/3
+ *
+ */
 
 #include "IDCXTP/inc/xtpobj.h"
 #include "TuiTypes.h"
 #include "GenTypes.h"
-
-#define XTP_NODE_MASTER					0x10
-#define XTP_NODE_COLLIMATOR_CONTROL		0x20
-#define XTP_NODE_GENERATOR				0x30
-#define XTP_NODE_TUI					0x70
-
-
-
 
 
 #define TUI_CMD_SETS			0x0301
