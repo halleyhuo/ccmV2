@@ -40,10 +40,6 @@ typedef uint8		FocusType;
 #define FOCUS_TYPE_LARGE		2
 
 typedef uint8		FpsValueType;
-#define FPS_5					5
-#define FPS_10					10
-#define FPS_15					15
-#define FPS_30					30
 
 typedef uint8		EndReasonType;
 #define ER_MAS_REACHED			1
@@ -61,6 +57,35 @@ typedef uint8		GeneratorState;
 #define GEN_STATE_ERROR			4
 #define GEN_STATE_EXPOSURE		5
 
+const uint32 GEN_FPS[] = {5, 10, 20, 50, 100, 150, 300};
+
+#define GEN_FPS_COUNT		(sizeof(GEN_FPS) / sizeof(uint32))
+
+#define GEN_GET_FPS_INDEX(fps, index)				\
+do													\
+{													\
+	BOOL		find = FALSE;						\
+	for(index = 0; index < GEN_FPS_COUNT; index++)	\
+	{												\
+		if(GEN_FPS[index] == fps)					\
+		{											\
+			find = TRUE;							\
+			break;									\
+		}											\
+	}												\
+	if(!find)										\
+	{												\
+		index = 0xFF;								\
+	}												\
+}													\
+while (0)
+
+#define GEN_GET_FPS(index, fps)						\
+do													\
+{													\
+	fps = GEN_FPS[index];							\
+}													\
+while (0)
 
 typedef struct _ActualExposureData
 {

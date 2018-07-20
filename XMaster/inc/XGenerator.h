@@ -49,6 +49,7 @@ class CXGenerator : public CIDCThread
 
 		void OnXCmdGenMode(XCmdGenParam xCmdGenParam);
 
+		void OnXCmdGenFps(XCmdGenParam xCmdGenParam);
 
 	private:
 		GeneratorStatus		genStatus;

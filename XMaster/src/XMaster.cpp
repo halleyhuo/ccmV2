@@ -96,6 +96,7 @@ void XMasterCallBackFunc(tXtpObjHeader * msg, void * para)
 			case TUI_CMD_SETS:
 			{
 				TuiCmdSets	*pTuiCmdSets = (TuiCmdSets *)(msg + 1);
+
 				OnTuiCmdSets(pTuiCmdSets);
 			}
 			break;
@@ -103,6 +104,7 @@ void XMasterCallBackFunc(tXtpObjHeader * msg, void * para)
 			case GEN_REPORT:
 			{
 				GenReport	*genReport = (GenReport *)(msg + 1);
+
 				OnGenReport(genReport);
 			}
 			break;
@@ -149,11 +151,11 @@ void CXMaster::OnTransCmdGen(GenCmd *pGenCmd)
 {
 	GenCmdFrame			genCmdFrame;
 
-	genCmdFrame.header.sender	= xtpClient->GetNodeID();
-	genCmdFrame.header.target	= XTP_NODE_GENERATOR;
-	genCmdFrame.header.telID	= GEN_CMD;
-	genCmdFrame.header.mode		= XTP_MODE_DIRECT;
-	genCmdFrame.header.length	= sizeof(GenCmdFrame);
+	genCmdFrame.header.sender		= xtpClient->GetNodeID();
+	genCmdFrame.header.target		= XTP_NODE_GENERATOR;
+	genCmdFrame.header.telID		= GEN_CMD;
+	genCmdFrame.header.mode			= XTP_MODE_DIRECT;
+	genCmdFrame.header.length		= sizeof(GenCmdFrame);
 	memcpy(&genCmdFrame.genCmd, pGenCmd, sizeof(GenCmd));
 
 	xtpClient->XtpSend(&genCmdFrame.header);

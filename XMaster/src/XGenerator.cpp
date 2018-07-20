@@ -29,7 +29,7 @@ CXGenerator::CXGenerator() : CIDCThread("xGenerator", IDC_TASK_XGENERATOR, Small
 	genStatus.genPresets.ma			= 0;
 	genStatus.genPresets.mas		= 0;
 	genStatus.genPresets.focus		= FOCUS_TYPE_SMALL;
-	genStatus.genPresets.fps		= FPS_5;
+	genStatus.genPresets.fps		= GEN_FPS[0];
 }
 
 CXGenerator::~CXGenerator()
@@ -75,12 +75,11 @@ void CXGenerator::OnXCmdGen(XCmdGen * pXCmdGen)
 	switch (pXCmdGen->xCmdGenId)
 	{
 		case X_CMD_GEN_MODE:
-		{
 			OnXCmdGenMode(pXCmdGen->xCmdGenParam);
-		}
-		break;
+			break;
 
 		case X_CMD_GEN_FPS:
+			OnXCmdGenFps(pXCmdGen->xCmdGenParam);
 			break;
 
 		case X_CMD_GEN_MAGNIFY:
@@ -164,5 +163,43 @@ void CXGenerator::OnXCmdGenMode(XCmdGenParam xCmdGenParam)
 
 	CIDCThread::ITCSend(&transCmdGenFrame.header);
 }
+
+
+void CXGenerator::OnXCmdGenFps(XCmdGenParam xCmdGenParam)
+{
+	XCmdGenFps			xGenFps = (XCmdGenFps) xCmdGenParam;
+	TransCmdGenFrame	transCmdGenFrame;
+
+	switch(xGenFps)
+	{
+		case X_CMD_GEN_FPS_N:
+		default:
+		{
+			uint8			fpsIndex;
+
+			GEN_GET_FPS_INDEX(genStatus.genPresets.fps, fpsIndex);
+
+			fpsIndex++;
+			if(fpsIndex >= GEN_FPS_COUNT)
+				fpsIndex = 0;
+
+			GEN_GET_FPS(fpsIndex, genStatus.genPresets.fps);
+		}
+		break;
+	}
+
+	transCmdGenFrame.header.tidSrc			= IDC_TASK_XGENERATOR;
+	transCmdGenFrame.header.tidTarget		= IDC_TASK_XMASTER;
+	transCmdGenFrame.header.mode			= 0;
+	transCmdGenFrame.header.flowControl		= 0;
+	transCmdGenFrame.header.len				= sizeof(TransCmdGenFrame);
+	transCmdGenFrame.header.ITCObjectID		= TRANS_CMD_GEN;
+
+	transCmdGenFrame.genCmd.genCmdId		= GEN_CMD_SET_PARAM_PRE;
+	memcpy(&transCmdGenFrame.genCmd.param.preParam, &genStatus.genPresets, sizeof(PresetParam));
+
+	CIDCThread::ITCSend(&transCmdGenFrame.header);
+}
+
 
 
